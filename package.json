@@ -1,0 +1,43 @@
+{
+  "name": "arabic-phone",
+  "version": "0.1.0",
+  "description": "Normalize phone numbers and Arabic text the way people actually write them — trunk zeros, Arabic-Indic digits, invisible RTL marks.",
+  "keywords": [
+    "phone",
+    "e164",
+    "arabic",
+    "normalize",
+    "rtl",
+    "whatsapp",
+    "otp",
+    "saudi",
+    "gulf"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "check": "tsc --noEmit -p tsconfig.json && npm test"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
