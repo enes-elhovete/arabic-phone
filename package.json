@@ -4,14 +4,25 @@
   "description": "Normalize phone numbers and Arabic text the way people actually write them — trunk zeros, Arabic-Indic digits, invisible RTL marks.",
   "keywords": [
     "phone",
+    "phone-number",
     "e164",
-    "arabic",
+    "validation",
     "normalize",
+    "arabic",
+    "arabic-digits",
     "rtl",
+    "bidi",
+    "i18n",
+    "saudi",
+    "ksa",
+    "gulf",
+    "gcc",
+    "egypt",
     "whatsapp",
     "otp",
-    "saudi",
-    "gulf"
+    "sms",
+    "typescript",
+    "zero-dependencies"
   ],
   "license": "MIT",
   "type": "module",
@@ -39,5 +50,14 @@
   },
   "engines": {
     "node": ">=20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enes-elhovete/arabic-phone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/enes-elhovete/arabic-phone/issues"
+  },
+  "homepage": "https://github.com/enes-elhovete/arabic-phone#readme",
+  "author": "Enes Elhovete"
 }

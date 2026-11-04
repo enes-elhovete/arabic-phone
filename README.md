@@ -1,15 +1,27 @@
 # arabic-phone
 
-Normalize phone numbers **and Arabic text** the way people in Arabic-speaking regions
-actually write them — trunk zeros, Arabic-Indic digits, and the invisible RTL marks that
-WhatsApp quietly inserts.
+[![CI](https://github.com/enes-elhovete/arabic-phone/actions/workflows/ci.yml/badge.svg)](https://github.com/enes-elhovete/arabic-phone/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](./tsconfig.json)
+[![Zero dependencies](https://img.shields.io/badge/dependencies-0-success)](./package.json)
+[![Node](https://img.shields.io/badge/node-%3E%3D20-339933?logo=node.js&logoColor=white)](./package.json)
 
-تطبيع أرقام الجوال **والنصّ العربي** كما يكتبها الناس فعلاً: الصفر الوطني، والأرقام
-العربية، والمحارف غير المرئية التي تحشرها واتساب بصمت.
+**Phone number normalization and validation for Arabic-speaking users** — Saudi Arabia,
+the Gulf, Egypt, the Levant and beyond. Converts any way a number is written into one
+E.164 string: leading/trunk zeros, Arabic-Indic digits (`٠٥٥`), the `00` international
+prefix, spaces and dashes. Also normalizes Arabic **text** for matching by stripping the
+invisible RTL marks that WhatsApp inserts.
+
+**تطبيع أرقام الجوال العربية والتحقّق منها** — السعودية والخليج ومصر والشام وغيرها.
+يحوّل كل صيغة يُكتب بها الرقم إلى صيغة E.164 واحدة: الصفر الوطني، والأرقام العربية
+`٠٥٥`، وبادئة `00`، والمسافات والشرطات. ويُطبّع **النصّ العربي** للمطابقة بإزالة
+المحارف غير المرئية التي تحشرها واتساب.
 
 ```bash
 npm install arabic-phone
 ```
+
+**197 countries · zero dependencies · ESM · TypeScript types · nothing throws**
 
 ---
 
@@ -136,6 +148,24 @@ extractCode(text, { prefix: 'ACME', length: 8, alphabet: '0123456789ABCDEF' })
 Nothing throws. Every function accepts `unknown` and refuses what it cannot use.
 
 ---
+
+## Why not libphonenumber?
+
+[libphonenumber](https://github.com/google/libphonenumber) is the complete answer to phone
+numbers: carriers, number types, formatting, every edge case on earth. If you need that,
+use it — this library does not replace it.
+
+`arabic-phone` solves a narrower problem that the big libraries do not center:
+
+| | `arabic-phone` | general-purpose libraries |
+| --- | --- | --- |
+| Arabic-Indic digits (`٠٥٥١٢٣٤٥٦٧`) | converted | usually stripped as non-digits |
+| Invisible RTL marks in text | removed | out of scope |
+| Install size | one small file, no deps | hundreds of KB of metadata |
+| Answer when it refuses | `no_country_code` vs `bad_length` | often a single boolean |
+
+Use both if it helps: normalize with `arabic-phone`, then hand the clean E.164 string to
+whatever needs it.
 
 ## Notes
 
