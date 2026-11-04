@@ -5,9 +5,16 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 24 is the version publish.yml releases on. Without it here, a green CI
+        # would say nothing about whether a release can even be built.
+        node: ['22', '24']
+    name: check (node ${{ matrix.node }})
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: '22' }
-      - run: npm install
+        with: { node-version: '${{ matrix.node }}' }
+      - run: npm ci
       - run: npm run check

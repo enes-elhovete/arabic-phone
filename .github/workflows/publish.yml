@@ -1,0 +1,55 @@
+name: Publish
+
+# A release is cut by pushing a tag:  git tag v0.1.1 && git push origin v0.1.1
+#
+# No npm token exists anywhere for this package — not in the repository secrets,
+# not on a maintainer's machine. The registry trusts this workflow itself
+# (npm trusted publishing, OIDC), and in return stamps the release with
+# provenance: proof that these exact files were built from this exact commit.
+# A stolen token cannot publish what no token can publish.
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # this, and only this, is what the registry trusts
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # No registry-url / always-auth on purpose: they write a token-based
+      # .npmrc, and npm then attempts token auth and fails instead of using OIDC.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # OIDC publishing needs npm >= 11.5.1. Pinning the major keeps a release
+      # pipeline boring rather than inheriting whatever the runner image ships.
+      - run: npm install -g npm@11
+      - run: npm --version
+
+      - run: npm ci
+
+      # A tag that disagrees with package.json publishes the wrong version, or
+      # re-publishes one that exists. Refuse before the registry is touched.
+      - name: The tag must be the version being published
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg="$(node -p 'require("./package.json").version')"
+          if [ "$tag" != "$pkg" ]; then
+            echo "::error::tag v$tag does not match package.json $pkg" >&2
+            exit 1
+          fi
+          echo "publishing arabic-phone@$pkg"
+
+      # prepublishOnly re-runs the type check, the tests and the build here, so
+      # nothing reaches the registry that did not just pass all three.
+      - run: npm publish
