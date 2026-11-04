@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/arabic-phone?logo=npm&color=CB3837)](https://www.npmjs.com/package/arabic-phone)
 [![npm downloads](https://img.shields.io/npm/dm/arabic-phone?color=CB3837)](https://www.npmjs.com/package/arabic-phone)
-[![install size](https://img.shields.io/badge/install%20size-33%20kB-success)](https://www.npmjs.com/package/arabic-phone)
+[![install size](https://img.shields.io/npm/unpacked-size/arabic-phone?label=install%20size&color=success)](https://www.npmjs.com/package/arabic-phone)
 [![CI](https://github.com/enes-elhovete/arabic-phone/actions/workflows/ci.yml/badge.svg)](https://github.com/enes-elhovete/arabic-phone/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](./tsconfig.json)
