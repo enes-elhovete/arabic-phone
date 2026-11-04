@@ -18,3 +18,21 @@ jobs:
         with: { node-version: '${{ matrix.node }}' }
       - run: npm ci
       - run: npm run check
+
+  # package.json claims `engines: node >=20`. The suite above cannot test that
+  # claim: it runs TypeScript through node's type stripping, which 20 does not
+  # have. So build here and run the compiled output — the only thing a consumer
+  # ever executes — on the oldest runtime we advertise.
+  engines:
+    runs-on: ubuntu-latest
+    name: dist runs on the oldest node we claim
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '24' }
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: node --version
+      - run: node test/smoke.mjs
