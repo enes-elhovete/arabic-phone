@@ -1,6 +1,6 @@
 {
   "name": "arabic-phone",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Normalize phone numbers and Arabic text the way people actually write them — trunk zeros, Arabic-Indic digits, invisible RTL marks.",
   "keywords": [
     "phone",
