@@ -1,0 +1,18 @@
+name: OIDC probe
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      # Presence only. The request URL and token are credentials and are never printed.
+      - name: Is an OIDC token obtainable in this repository at all?
+        run: |
+          echo "ACTIONS_ID_TOKEN_REQUEST_URL   : ${ACTIONS_ID_TOKEN_REQUEST_URL:+PRESENT}${ACTIONS_ID_TOKEN_REQUEST_URL:-ABSENT}"
+          echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN : ${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+PRESENT}${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-ABSENT}"
