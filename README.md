@@ -130,6 +130,7 @@ extractCode(text, { prefix: 'ACME', length: 8, alphabet: '0123456789ABCDEF' })
 | `normalizeArabicText(raw)` | text without invisible marks, Arabic digits converted |
 | `extractCode(raw, options)` | the canonical code, or `null` |
 | `mayCarryCode(raw, prefix)` | cheap pre-check before heavier work |
+| `DEFAULT_ALPHABET` | the look-alike-free alphabet `extractCode` uses by default |
 | `DIAL_RULES` | `{ code, dial, min, max }` for 197 countries |
 
 Nothing throws. Every function accepts `unknown` and refuses what it cannot use.

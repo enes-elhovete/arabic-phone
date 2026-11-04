@@ -93,4 +93,4 @@ export function samePhone(a: unknown, b: unknown, options?: NormalizeOptions): b
   return !!x && x === e164OrEmpty(b, options)
 }
 
-export { normalizeArabicText, extractCode, type ExtractOptions } from './text.ts'
+export { normalizeArabicText, extractCode, mayCarryCode, DEFAULT_ALPHABET, type ExtractOptions } from './text.ts'
