@@ -43,7 +43,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "node --experimental-strip-types --test test/*.test.ts",
-    "check": "tsc --noEmit -p tsconfig.json && npm test"
+    "check": "tsc --noEmit -p tsconfig.json && npm test",
+    "prepublishOnly": "npm run check && npm run build"
   },
   "devDependencies": {
     "typescript": "^5.7.0"
