@@ -172,10 +172,6 @@ whatever needs it.
 
 ## Notes
 
-- **Published from CI, with provenance.** No publish token exists for this package —
-  the registry trusts one GitHub Actions workflow in this repository over OIDC, and
-  attaches a signed statement tying the tarball to the commit it was built from.
-  Check it yourself: `npm audit signatures`.
 - **No country names.** `DIAL_RULES` carries ISO-3166 codes only; naming is a UI concern,
   and leaving it out keeps the library neutral.
 - **Zero dependencies**, ESM, TypeScript types included.
