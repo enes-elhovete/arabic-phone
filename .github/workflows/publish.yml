@@ -53,3 +53,17 @@ jobs:
       # prepublishOnly re-runs the type check, the tests and the build here, so
       # nothing reaches the registry that did not just pass all three.
       - run: npm publish
+
+      # npm keeps the OIDC exchange, and the registry's reason for refusing it,
+      # at verbose level in a debug log inside the runner — which dies with the
+      # job. A failed release would otherwise show only `ENEEDAUTH`, which says
+      # nothing about why the registry declined. Print it while it still exists.
+      - name: Why npm refused
+        if: failure()
+        run: |
+          for f in "$HOME"/.npm/_logs/*-debug-*.log; do
+            [ -e "$f" ] || continue
+            echo "::group::$(basename "$f")"
+            grep -viE 'authToken|bearer|_auth|ACTIONS_ID_TOKEN_REQUEST_TOKEN' "$f" | tail -120
+            echo '::endgroup::'
+          done
