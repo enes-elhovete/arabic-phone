@@ -59,9 +59,28 @@ jobs:
           fi
           echo "publishing arabic-phone@$pkg"
 
+      # A release published by hand still gets its commit tagged, and that tag
+      # fires this workflow — which would then fail on "cannot publish over the
+      # previously published version" and leave a red mark on a release that
+      # actually succeeded. Re-running a finished release would do the same.
+      # Checking first makes the workflow idempotent: tag whenever you like.
+      - name: Is this version already on the registry?
+        id: published
+        run: |
+          name="$(node -p 'require("./package.json").name')"
+          version="$(node -p 'require("./package.json").version')"
+          if npm view "$name@$version" version >/dev/null 2>&1; then
+            echo "already=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::$name@$version is already published — nothing to do"
+          else
+            echo "already=false" >> "$GITHUB_OUTPUT"
+            echo "$name@$version is not on the registry yet"
+          fi
+
       # prepublishOnly re-runs the type check, the tests and the build here, so
       # nothing reaches the registry that did not just pass all three.
       - run: npm publish
+        if: steps.published.outputs.already == 'false'
 
       # npm keeps the OIDC exchange, and the registry's reason for refusing it,
       # at verbose level in a debug log inside the runner — which dies with the
