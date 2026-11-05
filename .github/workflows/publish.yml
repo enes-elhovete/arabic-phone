@@ -2,6 +2,15 @@ name: Publish
 
 # A release is cut by pushing a tag:  git tag v0.1.1 && git push origin v0.1.1
 #
+# BLOCKED, and not by anything in this file: npm's OIDC token exchange answers
+# `404 package not found` for every repository created after 2026-07-15, because
+# GitHub issues those repositories immutable subject claims
+# (`repo:owner@<id>/repo@<id>`) that npm does not yet parse. This repository was
+# created 2026-11-04 and `use_immutable_subject` cannot be turned off.
+#   https://github.com/npm/cli/issues/9969  (open, Priority 1, no fix yet)
+# The workflow is correct and is kept as-is: it starts working the day npm ships
+# the fix. Until then releases go out by hand, without provenance.
+#
 # No npm token exists anywhere for this package — not in the repository secrets,
 # not on a maintainer's machine. The registry trusts this workflow itself
 # (npm trusted publishing, OIDC), and in return stamps the release with
