@@ -1,0 +1,16 @@
+name: Feature or country rule
+description: Missing behaviour, or a dial rule that is wrong for a country
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What real input does this not handle today?
+      description: An example string is worth more than a description.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: For a dial-code or length change, a link to the national numbering plan.
