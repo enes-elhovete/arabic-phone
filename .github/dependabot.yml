@@ -1,0 +1,17 @@
+version: 2
+updates:
+  # The package has zero runtime dependencies, so these are dev tools only
+  # (TypeScript, test runner). One grouped PR a week keeps CI honest about
+  # the toolchain without a stream of single-package PRs.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      dev-tooling:
+        patterns: ['*']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

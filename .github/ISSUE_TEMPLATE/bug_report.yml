@@ -1,0 +1,30 @@
+name: Wrong result
+description: A number or text that normalizes to the wrong thing, or is refused when it should not be
+labels: [bug]
+body:
+  - type: input
+    id: input
+    attributes:
+      label: Input
+      description: The exact string you passed in. Change real digits if it is a real person's number, but keep the format.
+      placeholder: "'+966 055 123 4567'"
+    validations:
+      required: true
+  - type: input
+    id: call
+    attributes:
+      label: Call
+      placeholder: normalizeE164(input, { rules: gulf })
+    validations:
+      required: true
+  - type: textarea
+    id: got
+    attributes:
+      label: What you got, and what you expected
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: arabic-phone version
+      placeholder: 0.1.0
