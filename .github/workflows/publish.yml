@@ -32,7 +32,7 @@ jobs:
       id-token: write # this, and only this, is what the registry trusts
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # No registry-url / always-auth on purpose: they write a token-based
       # .npmrc, and npm then attempts token auth and fails instead of using OIDC.
